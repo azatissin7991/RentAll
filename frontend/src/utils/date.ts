@@ -12,13 +12,14 @@
 export const formatDate = (
   date: string | Date,
   options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   }
 ): string => {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
-  return dateObj.toLocaleDateString('en-US', options);
+  return dateObj.toLocaleDateString('ru-RU', options);
 };
 
 /**

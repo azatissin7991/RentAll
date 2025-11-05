@@ -371,16 +371,42 @@ export const MyListingsPage = () => {
                 <div className="p-5 sm:p-6 flex-1 flex flex-col">
                   <div className="mb-3">
                     <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-slate-100 text-slate-700 mb-2">
-                      {item.listingType.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                      {item.listingType === 'room' ? 'Комната' : item.listingType === 'apartment' ? 'Квартира' : 'Место в комнате'}
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-2">{item.title}</h3>
                     <p className="text-sm text-gray-500 mb-2">{item.location}</p>
                   </div>
                   <p className="text-2xl font-bold text-slate-700 mb-4">
-                    ${item.price.toLocaleString()}/month
+                    ${item.price.toLocaleString()}/месяц
                   </p>
                   <p className="text-sm text-gray-700 mb-4 line-clamp-2 flex-1">{item.description}</p>
-                  <div className="mt-auto pt-4 border-t border-gray-100 flex gap-2">
+                  <div className="mt-auto pt-4 border-t border-gray-100 space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm">
+                      {item.contactEmail && (
+                        <a
+                          href={`mailto:${item.contactEmail}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1 text-slate-600 hover:text-slate-700 hover:underline truncate"
+                          title={item.contactEmail}
+                        >
+                          <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                          <span className="truncate">{item.contactEmail}</span>
+                        </a>
+                      )}
+                      <a
+                        href={`tel:${item.contactPhone}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1 text-slate-600 hover:text-slate-700 hover:underline"
+                      >
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        <span className="truncate">{item.contactPhone}</span>
+                      </a>
+                    </div>
+                    <div className="flex gap-2">
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -401,6 +427,7 @@ export const MyListingsPage = () => {
                     >
                       Удалить
                     </button>
+                  </div>
                   </div>
                 </div>
               </Link>
@@ -436,13 +463,42 @@ export const MyListingsPage = () => {
                     <p className="text-sm text-gray-500 mb-2">{item.location}</p>
                   </div>
                   <p className="text-2xl font-bold text-slate-700 mb-2">
-                    ${item.price.toLocaleString()}{item.listingType === 'rent' ? '/month' : ''}
+                    ${item.price.toLocaleString()}{item.listingType === 'rent' ? '/месяц' : ''}
                   </p>
-                  <p className="text-sm text-gray-600 mb-4">
-                    {item.mileage.toLocaleString()} miles • {item.condition}
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.mileage.toLocaleString()} миль • {item.condition === 'excellent' ? 'Отличное' : item.condition === 'good' ? 'Хорошее' : item.condition === 'fair' ? 'Удовлетворительное' : 'Плохое'}
+                  </p>
+                  <p className="text-sm text-gray-500 mb-2">
+                    {item.transmission === 'automatic' ? 'Автомат' : 'Механика'} • {item.fuelType === 'gasoline' ? 'Бензин' : item.fuelType === 'electric' ? 'Электрический' : item.fuelType === 'hybrid' ? 'Гибрид' : 'Дизель'}
                   </p>
                   <p className="text-sm text-gray-700 mb-4 line-clamp-2 flex-1">{item.description}</p>
-                  <div className="mt-auto pt-4 border-t border-gray-100 flex gap-2">
+                  <div className="mt-auto pt-4 border-t border-gray-100 space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm">
+                      {item.contactEmail && (
+                        <a
+                          href={`mailto:${item.contactEmail}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1 text-slate-600 hover:text-slate-700 hover:underline truncate"
+                          title={item.contactEmail}
+                        >
+                          <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                          <span className="truncate">{item.contactEmail}</span>
+                        </a>
+                      )}
+                      <a
+                        href={`tel:${item.contactPhone}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1 text-slate-600 hover:text-slate-700 hover:underline"
+                      >
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        <span className="truncate">{item.contactPhone}</span>
+                      </a>
+                    </div>
+                    <div className="flex gap-2">
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -464,6 +520,7 @@ export const MyListingsPage = () => {
                       Удалить
                     </button>
                   </div>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -481,17 +538,43 @@ export const MyListingsPage = () => {
                     <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full mb-2 ${
                       item.direction === 'US_to_Kazakhstan' ? 'bg-stone-200 text-stone-800' : 'bg-slate-200 text-slate-800'
                     }`}>
-                      {item.direction === 'US_to_Kazakhstan' ? 'US → KZ' : 'KZ → US'}
+                      {item.direction === 'US_to_Kazakhstan' ? 'США → КЗ' : 'КЗ → США'}
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                       {item.locationFrom} → {item.locationTo}
                     </h3>
                     <p className="text-sm text-gray-500 mb-2">
-                      {new Date(item.travelDate).toLocaleDateString()}
+                      {new Date(item.travelDate).toLocaleDateString('ru-RU')}
                     </p>
                   </div>
                   <p className="text-sm text-gray-700 mb-4 line-clamp-2 flex-1">{item.description}</p>
-                  <div className="mt-auto pt-4 border-t border-gray-100 flex gap-2">
+                  <div className="mt-auto pt-4 border-t border-gray-100 space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm">
+                      {item.contactEmail && (
+                        <a
+                          href={`mailto:${item.contactEmail}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1 text-slate-600 hover:text-slate-700 hover:underline truncate"
+                          title={item.contactEmail}
+                        >
+                          <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                          <span className="truncate">{item.contactEmail}</span>
+                        </a>
+                      )}
+                      <a
+                        href={`tel:${item.contactPhone}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1 text-slate-600 hover:text-slate-700 hover:underline"
+                      >
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        <span className="truncate">{item.contactPhone}</span>
+                      </a>
+                    </div>
+                    <div className="flex gap-2">
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -512,6 +595,7 @@ export const MyListingsPage = () => {
                     >
                       Удалить
                     </button>
+                  </div>
                   </div>
                 </div>
               </Link>

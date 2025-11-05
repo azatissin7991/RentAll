@@ -305,8 +305,8 @@ export const AutoForm = ({ auto, onSuccess }: AutoFormProps) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Миниатюра карточки (необязательно)</label>
-        <p className="text-xs text-gray-500 mb-2">Это изображение будет показано на карточках объявлений. Если не указано, будет использовано первое изображение.</p>
+        <label className="block text-sm font-medium mb-1">Главное изображение</label>
+        
         <input
           type="file"
           accept="image/*"
