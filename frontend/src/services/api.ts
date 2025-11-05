@@ -19,7 +19,7 @@ export interface ContactFormData {
 }
 
 /** Base URL for all API endpoints */
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * Get authentication token from localStorage

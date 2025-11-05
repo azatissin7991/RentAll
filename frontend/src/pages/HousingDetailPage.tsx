@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { housingApi } from '../services/api';
 import type { Housing } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
@@ -15,7 +15,6 @@ import { ActionButtons } from '../components/ActionButtons';
 
 export const HousingDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const location = useLocation();
   const [housing, setHousing] = useState<Housing | null>(null);
   const [loading, setLoading] = useState(true);

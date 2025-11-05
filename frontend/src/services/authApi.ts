@@ -1,6 +1,6 @@
 import type { AuthResponse, User } from '../types';
 
-const API_BASE_URL = '/api/auth';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL || '/api'}/auth`;
 
 export const authApi = {
   register: async (name: string, email: string, password: string, phone?: string): Promise<AuthResponse> => {

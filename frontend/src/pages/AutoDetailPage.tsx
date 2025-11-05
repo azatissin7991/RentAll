@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { autoApi } from '../services/api';
 import type { Auto } from '../types';
 import { LoadingSpinner } from '../components/LoadingSpinner';
@@ -10,12 +10,11 @@ import { ImageGallery } from '../components/ImageGallery';
 import { BackButton } from '../components/BackButton';
 import { ActionButtons } from '../components/ActionButtons';
 import { combineImages } from '../utils/imageHelpers';
-import { formatListingType, formatNumber } from '../utils/formatting';
+import { formatNumber } from '../utils/formatting';
 import { formatDate } from '../utils/date';
 
 export const AutoDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const location = useLocation();
   const [auto, setAuto] = useState<Auto | null>(null);
   const [loading, setLoading] = useState(true);
